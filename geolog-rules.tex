@@ -1,0 +1,127 @@
+\begin{mathpar}
+  \inferH{SchEmpty}{
+    \strut
+  }{
+    \IsSchema{\EmpSchema}
+  }
+  \and
+  \inferH{SchExt}{
+    \IsSchema{\Gamma} \\
+    \IsLTy{A}
+  }{
+    \IsSchema{\ExtSchema{x}{A}}
+  }
+  \and
+  \inferH{Var}{
+    (x : A) \in \Gamma
+  }{
+    \IsTm{x}{A}
+  }
+  \and
+  \inferH{P-Incl}{
+    \IsProp{\varphi}
+  }{
+    \IsLTy{\varphi}
+  }
+  \and
+  \inferH{S-Incl}{
+    \IsSTy{X}
+  }{
+    \IsLTy{X}
+  }
+  \and
+  \inferH{P-Uni-Form}{
+    \strut
+  }{
+    \IsLTy{\PUni}
+  }
+  \and
+  \inferH{P-Uni-Intro}{
+    \IsProp{\varphi}
+  }{
+    \IsTm{\varphi}{\PUni}
+  }
+  \and
+  \inferH{P-Uni-Elim}{
+    \IsTm{\varphi}{\PUni}
+  }{
+    \IsProp{\varphi}
+  }
+  \and
+  \inferH{S-Uni-Form}{
+    \strut
+  }{
+    \IsLTy{\SUni}
+  }
+  \and
+  \inferH{S-Uni-Intro}{
+    \IsSTy{X}
+  }{
+    \IsTm{X}{\SUni}
+  }
+  \and
+  \inferH{S-Uni-Elim}{
+    \IsTm{X}{\SUni}
+  }{
+    \IsSTy{X}
+  }
+  \and
+  \inferH{Pi-Form}{
+    \IsSTy{A} \\
+    \IsLTy[\ExtSchema{x}{A}]{B}
+  }{
+    \IsLTy{\PiType[x]{A}{B}}
+  }
+  % \and
+  % \inferH{Pi-Intro}{
+  %   \IsTm[\ExtSchema{x}{A}]{M}{B}
+  % }{
+  %   \IsTm{\Lam{x}[A]{M}}{\PiType[x]{A}{B}} \\
+  % }
+  \and
+  \inferH{Pi-Elim}{
+    \IsTm{M}{\PiType[x]{A}{B}} \\
+    \IsTm{N}{A} \\
+  }{
+    \IsTm{\App{M}{N}}{\Subst{B}{M}{x}}
+  }
+  \and
+  \inferH{Prop-True}{
+    \strut
+  }{
+    \IsProp{\True}
+  }
+  \and
+  \inferH{Prop-False}{
+    \strut
+  }{
+    \IsProp{\False}
+  }
+  \and
+  \inferH{Prop-And}{
+    \IsProp{\varphi} \\
+    \IsProp{\psi}
+  }{
+    \IsProp{\varphi \land \psi}
+  }
+  \and
+  \inferH{Prop-Or}{
+    \IsProp{\varphi} \\
+    \IsProp{\psi}
+  }{
+    \IsProp{\varphi \lor \psi}
+  }
+  \and
+  \inferH{Prop-Exists}{
+    \IsProp[\ExtSchema{x}{A}]{\varphi} \\
+  }{
+    \IsProp{\Exists{x}[A]{\varphi}}
+  }
+  \and
+  \inferH{Prop-Eq}{
+    \IsTm{M}{A} \\
+    \IsTm{N}{A}
+  }{
+    \IsProp{\Eq{M}[A]{N}}
+  }
+\end{mathpar}

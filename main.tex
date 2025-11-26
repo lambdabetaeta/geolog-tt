@@ -1,114 +1,38 @@
-\documentclass{gak-article}
+\documentclass{nice-article}
 
 \usepackage{preamble}
 \usepackage{pftools}
-\usepackage{lipsum}
+\usepackage{locallabel}
 \usepackage{maths}
-\usepackage{lambda-macros}
+\usepackage{tt-macros}
 \usepackage{macros}
 
 \addbibresource{refs.bib}
 
-\title{A new paper dawns}
-\author{G. A. Kavvos \and Alex Kavvotsky}
-\date{\today}
+\title{A Geometric Type Theory for Databases}
+\author{
+  Owen Lynch
+  \and
+  G. A. Kavvos
+}
+\date{November 2025}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-  \lipsum[1]
+  We introduce a basic geometric type theory. This is meant to be used for
+  writing down database schemata and their integrity constraints.
 \end{abstract}
 
-\tableofcontents
+This type theory is inspired by the work of \textcite{vickers_1992}. The
+particular presentation is closest to \textcite{kaposi_2019,kovacs_2022}.
 
-
-\section{First}
-  \label{section:first}
-
-\subsection{First one}
-  Here is some mathematics: \( \int \frac{1}{x} = \ln |x| + C \).
-  
-  Here is a display block of mathematics:
-  \[
-    \mathbf{Y} \defeq (\lambda x. xx)(\lambda x. xx)
-  \]
-
-  \lipsum[1] \parencite{qian2021}
-
-\subsection{Second one}
-  \lipsum[2]
-  
-  \paragraph{Another paragraph}
-  Here's a grammar:
-  \begin{grammar}
-    Terms & M, N & x \mid \Lam{x}{M} \mid \App{M}{N}
-  \end{grammar}
-
-  \lipsum[3]
-  
-  \paragraph{Rules}
-
-  Here are some proof rules:
-  \begin{mathpar}
-    \inferrule{
-      \IsTerm[\Gamma, \DeclVar{x}{A}]{M}{B}
-    }{
-      \IsTerm{\Lam{x}[A]{M}}{A \to B}
-    }
-    
-    \and
-
-    \inferrule{
-      \IsTerm{M}{A \to B} \\
-      \IsTerm{N}{A}
-    }{
-      \IsTerm{\App{M}{N}}{B}
-    }
-  \end{mathpar}
-  There are various ways to label these rules: look up the \texttt{mathpartir} package documentation.
-
-  Or, if you load \texttt{pftools}, you can both label \emph{and} link to rules:
-  \begin{mathpar}
-    \inferH{Lam}{
-      \IsTerm[\Gamma, \DeclVar{x}{A}]{M}{B}
-    }{
-      \IsTerm{\Lam{x}[A]{M}}{A \to B}
-    }
-    
-    \and
-
-    \inferH{App}{
-      \IsTerm{M}{A \to B} \\
-      \IsTerm{N}{A}
-    }{
-      \IsTerm{\App{M}{N}}{B}
-    }
-  \end{mathpar}
-  You can then refer to rule \ruleref{Lam}.
-  
-  \begin{theorem}
-      \label{theorem:induction}
-    This can be proven by induction.
-  \end{theorem}
-  
-  We now prove \cref{theorem:induction} by induction.
-  
-  \begin{proof} \hfill
-    \begin{indproof}
-      \indcase{Base} Base case proof.
-
-      \indcase{Inductive} Inductive case proof.
-    \end{indproof}
-  \end{proof}
-
-  
-\section{Second}
-
-Recall that we proved \cref{theorem:induction} in \cref{section:first}.
-
-\lipsum[4]
+\begin{figure}
+  \input{geolog-rules}
+  \caption{Rules}
+\end{figure}
 
 \printbibliography
 

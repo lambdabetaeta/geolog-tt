@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{gak-article}[2024/02/26 GAK Article Template]
+\ProvidesClass{nice-article}[2024/02/26 Nice Article Template]
 
 %% KOMA options
 \LoadClass{scrartcl}
