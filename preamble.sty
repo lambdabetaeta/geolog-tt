@@ -1,0 +1,108 @@
+\usepackage{mleftright}
+\usepackage{ifthen}
+\usepackage{scalerel}
+\usepackage{epigraph}
+\usepackage{datetime}
+\usepackage{mathpartir}
+\usepackage{array}
+\usepackage{etoolbox}
+\usepackage{enumitem}
+
+% Biber - can be replaced if BibTeX is mandated
+
+\usepackage[
+  backend=biber,
+  doi=true,
+  citestyle=alphabetic,
+  backref=true,
+  sortcites=true,
+  style=alphabetic,
+  maxnames=1000,
+  mincrossrefs=99,
+  sorting=nyt,
+  sortcites
+]{biblatex}
+
+%% Colours
+
+\definecolor{Matterhorn}{RGB}{70,45,68}
+\definecolor{Cowboy}{RGB}{86,47,50}
+
+\definecolor{RegalBlue}{RGB}{3,69,117}
+\definecolor{RedDevil}{RGB}{134,1,17}
+
+\definecolor{IdiotPurple}{RGB}{102, 51, 102}
+\definecolor{FernGreen}{HTML}{467D5E}
+\definecolor{ThroneBlue}{RGB}{51, 51, 102}
+\definecolor{JustBlue}{RGB}{0,0,255}
+\definecolor{PermaRed}{RGB}{255, 102, 102}
+\definecolor{DogwoodRose}{HTML}{cc3366}
+\definecolor{MaizeCrayola}{RGB}{255, 204, 102}
+\definecolor{Black}{RGB}{0, 0, 0}
+
+\hypersetup{breaklinks=true,colorlinks=true,linkcolor=RedDevil,urlcolor=RedDevil, citecolor=RedDevil}
+
+%% Enumitem: macros for inductive proofs
+
+\newlist{indproof}{itemize}{5}
+\setlist[indproof]{%
+  % topsep=30pt,  % space before start / after end of list
+  itemsep=5pt,  % space between items
+  leftmargin=5pt,
+  listparindent=10pt,
+  font={\scshape}, % set the label font
+  label={}
+}
+\newcommand{\indcase}[1]{\item{{\scshape Case}(#1)}.}
+
+%% Environment for grammars
+%% Writing
+%%
+%%   \begin{grammar}
+%%     Term & P & Q \mid R \mid S \mid T
+%%   \end{grammar}
+%%
+%% produces
+%%
+%%   (Term) P ::= Q | R | S | T
+%%
+
+\newcommand\GrmContinue{\multicolumn{2}{l}{}} % for weird reasons this must be \newcommand
+  
+\NewDocumentEnvironment{grammar}{}{%
+  \par\vspace{.5\baselineskip}
+  \begin{tabular}{>{\itshape(}l<{)} >{$}l<{$} @{\quad $\Coloneqq$\quad } >{$}l<{$}}%
+}{%
+  \end{tabular}%
+  \par\vspace{.5\baselineskip}
+}
+
+\makeatletter
+\def\rightharpoonupfill@{\arrowfill@\relbar\relbar\rightharpoonup}
+\newcommand{\overrightharpoonup}{\mathpalette{\overarrow@\rightharpoonupfill@}}
+\makeatother
+
+\NewDocumentCommand\JdgFrame{m}{%
+  \fbox{$\displaystyle #1$}
+}
+
+%% Defines a wider version of bar that isn't as large as overline.  The code is stolen from
+%% https://tex.stackexchange.com/questions/16337/can-i-get-a-widebar-without-using-the-mathabx-package/60253#60253
+\makeatletter
+\newcommand*\rel@kern[1]{\kern#1\dimexpr\macc@kerna}
+\newcommand*\widebar[1]{%
+  \begingroup
+  \def\mathaccent##1##2{%
+    \rel@kern{0.8}%
+    \overline{\rel@kern{-0.8}\macc@nucleus\rel@kern{0.2}}%
+    \rel@kern{-0.2}%
+  }%
+  \macc@depth\@ne
+  \let\math@bgroup\@empty \let\math@egroup\macc@set@skewchar
+  \mathsurround\z@ \frozen@everymath{\mathgroup\macc@group\relax}%
+  \macc@set@skewchar\relax
+  \let\mathaccentV\macc@nested@a
+  \macc@nested@a\relax111{#1}%
+  \endgroup
+}
+\makeatother
